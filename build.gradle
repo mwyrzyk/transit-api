@@ -1,0 +1,25 @@
+group 'pl.mwyrzyk.transitapi'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'application'
+
+//this adds intellij specific gradle tasks
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'
+    providedCompile group: 'javax', name: 'javaee-api', version: '8.0'
+    providedCompile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    providedCompile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.9.5'
+    providedCompile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.5'
+    providedCompile group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.13'
+    providedCompile group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.5.1.Final'
+}
