@@ -14,6 +14,7 @@ import pl.mwyrzyk.transitapi.routing.RoutingResource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,6 @@ public class TransitService {
         return transitRepository.create(transit);
     }
 
-
     private Integer calculateDistance(String sourceAddress, String destinationAddress) {
         final String geocodingApiKey = applicationProperties.getProperty("geocoding-api-key");
         final List<String> points = new ArrayList<>();
@@ -47,6 +47,10 @@ public class TransitService {
         points.add(extractAddress(geocodingResource.translateAddress(destinationAddress, geocodingApiKey, 1)));
 
         return extractRoute(routingResource.designateRoutes(points, false, false, geocodingApiKey));
+    }
+
+    public Object[] getDailyReport(LocalDate since, LocalDate till) {
+        return transitRepository.sumDistanceAndPriceBetweenDates(since, till);
     }
 
     private String extractAddress(GeocodeDto geocodeDto) {
@@ -59,7 +63,7 @@ public class TransitService {
     }
 
     private Integer extractRoute(RouteDto routeDto) {
-       return Optional.ofNullable(routeDto)
+        return Optional.ofNullable(routeDto)
                 .map(RouteDto::getPaths)
                 .map(paths -> paths.isEmpty() ? null : paths.get(0))
                 .map(Path::getDistance)
@@ -67,4 +71,5 @@ public class TransitService {
                 .orElseThrow(() -> new ApplicationException(Response.Status.BAD_REQUEST, "Route not found"));
 
     }
+
 }

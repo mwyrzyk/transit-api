@@ -7,20 +7,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotEmpty;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TransitDto implements Serializable {
+public class TransitDto {
 
-    private static final long serialVersionUID = 3969455423566367171L;
-
+    @NotEmpty
     @JsonProperty("source_address")
     private String sourceAddress;
 
+    @NotEmpty
     @JsonProperty("destination_address")
     private String destinationAddress;
 
+    @NotEmpty
     @JsonProperty
-    private String price;
+    private Integer price;
 
+    @NotEmpty
     @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
@@ -40,11 +44,11 @@ public class TransitDto implements Serializable {
         this.destinationAddress = destinationAddress;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
