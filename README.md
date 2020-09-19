@@ -32,15 +32,8 @@ Additional points for asynchronous distance evaluation.
 
 Endpoint returns driven distance and earned money between two dates.
 
-HTTP REQUEST GET http://example.com/reports/daily?start_date=YYYY-MM-DD&end_date=YYYY-MM_DD
+HTTP REQUEST GET http://example.com/reports/daily?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
 
-Request body example:
-```javascript
-
-{
-  "start_date": "2018-01-20",
-  "end_date":   "2018-01-25"
-}
 ```
 Response body example:
 ```javascript

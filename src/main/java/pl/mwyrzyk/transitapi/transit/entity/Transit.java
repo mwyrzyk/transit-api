@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@NamedNativeQueries({@NamedNativeQuery(name = "Transit.sumDistanceAndPriceBetweenDates",
+        query = "SELECT SUM (distance) as distance, SUM(price) as price from transit where :since <= date AND date <= :till")})
 public class Transit {
 
     @Id
@@ -19,7 +21,7 @@ public class Transit {
 
     private Integer distance;
 
-    private String price;
+    private int price;
 
     private LocalDate date;
 
@@ -55,11 +57,11 @@ public class Transit {
         this.distance = distance;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
